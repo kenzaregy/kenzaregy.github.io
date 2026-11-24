@@ -2,7 +2,7 @@
 title: LOGOTYPE
 description: "Création pour La Balagance, marque de bagagerie artisanale,
   fabrication française et cuir à tannage végétal. "
-date: 2026-11-24
+date: "2022"
 cover: /images/La-Balagance-1.jpg
 tags:
   - LA BALAGANCE
