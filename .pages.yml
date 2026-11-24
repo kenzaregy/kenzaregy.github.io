@@ -1,0 +1,89 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, featured, draft]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Short description
+        type: text
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: cover
+        label: Cover image
+        type: image
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: link
+        label: Live URL
+        type: string
+      - name: repo
+        label: Source code URL
+        type: string
+      - name: featured
+        label: Featured on home page
+        type: boolean
+        default: false
+      - name: draft
+        label: Draft (hidden)
+        type: boolean
+        default: false
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: name
+        label: Your name
+        type: string
+        required: true
+      - name: role
+        label: Role / title
+        type: string
+      - name: tagline
+        label: Tagline (home page)
+        type: text
+      - name: about
+        label: About (blank line = new paragraph)
+        type: text
+      - name: avatar
+        label: Avatar
+        type: image
+      - name: email
+        label: Email
+        type: string
+      - name: socials
+        label: Social links
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: url
+            label: URL
+            type: string

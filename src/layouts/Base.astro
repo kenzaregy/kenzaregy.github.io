@@ -1,0 +1,68 @@
+---
+import site from '../data/site.json';
+import { url } from '../lib/url';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.tagline } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name} - ${site.role}`;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const nav = [
+  { href: url('/'), label: 'Home' },
+  { href: url('/projects/'), label: 'Projects' },
+  { href: url('/about/'), label: 'About' },
+];
+const home = url('/').replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  const h = href.replace(/\/$/, '') || '/';
+  return h === home ? current === home : current.startsWith(h);
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%234f46e5'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='34' font-weight='700' fill='white'>P</text></svg>"
+    />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={pageTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <header class="container header">
+      <a class="brand" href={url('/')}>{site.name}</a>
+      <nav>
+        {nav.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="container footer">
+      <p>&copy; {new Date().getFullYear()} {site.name}</p>
+      <ul class="socials">
+        {site.email && <li><a href={`mailto:${site.email}`}>Email</a></li>}
+        {site.socials?.map((s) => (
+          <li><a href={s.url} rel="me noopener" target="_blank">{s.label}</a></li>
+        ))}
+      </ul>
+    </footer>
+  </body>
+</html>

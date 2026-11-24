@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import site from '../data/site.json';
+import { url } from '../lib/url';
+
+const paragraphs = (site.about ?? '')
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter(Boolean);
+---
+
+<Base title="About">
+  <section class="about">
+    {site.avatar && <img class="avatar" src={url(site.avatar)} alt={site.name} />}
+    <h1>About me</h1>
+    <div class="prose">
+      {paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+    {site.email && (
+      <p>
+        <a class="button" href={`mailto:${site.email}`}>Contact me</a>
+      </p>
+    )}
+  </section>
+</Base>

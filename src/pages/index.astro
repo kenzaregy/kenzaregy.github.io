@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import site from '../data/site.json';
+import { getProjects, url } from '../lib/url';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured);
+const shown = (featured.length ? featured : projects).slice(0, 6);
+---
+
+<Base>
+  <section class="hero">
+    {site.avatar && <img class="avatar" src={url(site.avatar)} alt={site.name} />}
+    <p class="eyebrow">{site.role}</p>
+    <h1>Hi, I'm {site.name}.</h1>
+    {site.tagline && <p class="lead">{site.tagline}</p>}
+    <div class="actions">
+      <a class="button" href={url('/projects/')}>See my work</a>
+      {site.email && <a class="button ghost" href={`mailto:${site.email}`}>Get in touch</a>}
+    </div>
+  </section>
+
+  <section>
+    <h2>{featured.length ? 'Featured projects' : 'Recent projects'}</h2>
+    <div class="grid">
+      {shown.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</Base>
