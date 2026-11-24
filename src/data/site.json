@@ -3,10 +3,13 @@
   "role": "Design graphique",
   "tagline": "Je suis designeuse graphique. Voici une sélection de mes travaux.",
   "about": "Mon concept graphique est basé sur une stratégie minutieuse, afin d'optimiser vos objectifs de communication…",
-  "avatar": "",
-  "aboutImage": "",
-  "expertise": ["Direction artistique", "Branding", "Identité visuelle", "Webdesign"],
+  "aboutImage": "/images/about.webp",
+  "expertise": [
+    "Direction artistique",
+    "Branding",
+    "Identité visuelle",
+    "Webdesign"
+  ],
   "email": "kenzaregy@gmail.com",
-  "phone": "+33 6 73 43 02 36",
-  "socials": []
+  "phone": "+33 6 73 43 02 36"
 }
