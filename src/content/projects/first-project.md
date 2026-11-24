@@ -1,11 +1,10 @@
 ---
-title: Premier projet
-description: Un court résumé du projet, affiché sur les cartes.
-date: 2026-11-01
-cover: ""
+title: LIVRE BLEU DES THÈSES
+description: Couvertures des Livres Bleus des Thèses.
+date: 2018
+cover: "/images/Livre-Bleu-1.jpg"
 tags:
-  - Astro
-  - Design
+  - CNES
 link: https://example.com
 repo: https://github.com/USERNAME/first-project
 featured: true
@@ -14,7 +13,8 @@ draft: false
 
 ## Présentation
 
-Décrivez le projet : la problématique, votre rôle, les outils utilisés et le résultat.
+Couvertures des Livres Bleus des Thèses – Promotions 2018 & 2019 (parues en 2023 & 2024) .
+Le livre Bleu des Thèses recense les travaux de recherche prometteurs et le développement des technologies innovantes d’étudiants dans le domaine spatial, dans le cadre de leur thèse de doctorat. Ces recherches couvrent un large éventail de disciplines : systèmes orbitaux, systèmes de transport spatial, sciences utilisant les moyens spatiaux (sciences de la Terre, de l’Univers, exploration), ainsi que les sciences humaines et sociales. Ce projet est soutenu par le CNES, chaque année un nouveau livre est édité par promotion.
 
 ## Points forts
 

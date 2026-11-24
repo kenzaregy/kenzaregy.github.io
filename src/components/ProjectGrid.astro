@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../lib/url';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="grid">
+  {projects.map(({ id, data }) => (
+    <a class:list={['grid-item', { 'no-image': !data.cover }]} href={url(`/projects/${id}/`)}>
+      {data.cover && <img src={url(data.cover)} alt={data.title} loading="lazy" />}
+      <span class="grid-overlay" aria-hidden="true"></span>
+      <h3 class="grid-title">{data.title}</h3>
+    </a>
+  ))}
+</div>

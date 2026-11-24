@@ -76,6 +76,9 @@ content:
       - name: email
         label: E-mail
         type: string
+      - name: phone
+        label: Téléphone
+        type: string
       - name: socials
         label: Réseaux sociaux
         type: object

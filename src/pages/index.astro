@@ -16,7 +16,7 @@ const shown = (featured.length ? featured : projects).slice(0, 6);
     <h1>Bonjour, je suis {site.name}.</h1>
     {site.tagline && <p class="lead">{site.tagline}</p>}
     <div class="actions">
-      <a class="button" href={url('/projects/')}>Voir mes projets</a>
+      <a class="button" href={url('/projects/')}>Mes réalisations</a>
       {site.email && <a class="button ghost" href={`mailto:${site.email}`}>Me contacter</a>}
     </div>
   </section>

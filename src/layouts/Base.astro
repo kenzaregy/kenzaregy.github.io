@@ -13,8 +13,7 @@ const pageTitle = title ? `${title} | ${site.name}` : `${site.name} - ${site.rol
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const nav = [
-  { href: url('/'), label: 'Accueil' },
-  { href: url('/projects/'), label: 'Projets' },
+  { href: url('/projects/'), label: 'Réalisations' },
   { href: url('/about/'), label: 'À propos' },
 ];
 const home = url('/').replace(/\/$/, '') || '/';
@@ -59,7 +58,8 @@ const isActive = (href: string) => {
     <footer class="container footer">
       <p>&copy; {new Date().getFullYear()} {site.name}</p>
       <ul class="socials">
-        {site.email && <li><a href={`mailto:${site.email}`}>E-mail</a></li>}
+        {site.phone && <li><a href={`tel:${site.phone}`}>{site.phone}</a></li>}
+        <!-- {site.email && <li><a href={`mailto:${site.email}`}>E-mail</a></li>} -->
         {site.socials?.map((s) => (
           <li><a href={s.url} rel="me noopener" target="_blank">{s.label}</a></li>
         ))}
