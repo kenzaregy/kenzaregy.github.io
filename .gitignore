@@ -1,0 +1,9 @@
+.vscode/
+.bak/
+.test*
+*.pyc
+site/
+venv/
+pico/
+dump/
+signal/
