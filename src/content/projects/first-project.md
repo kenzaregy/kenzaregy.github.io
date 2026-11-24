@@ -1,6 +1,6 @@
 ---
-title: First Project
-description: A short summary of the project shown on cards.
+title: Premier projet
+description: Un court résumé du projet, affiché sur les cartes.
 date: 2026-11-01
 cover: ""
 tags:
@@ -12,12 +12,12 @@ featured: true
 draft: false
 ---
 
-## Overview
+## Présentation
 
-Describe the project: the problem, your role, the stack and the result.
+Décrivez le projet : la problématique, votre rôle, les outils utilisés et le résultat.
 
-## Highlights
+## Points forts
 
-- Feature one
-- Feature two
-- Feature three
+- Point fort 1
+- Point fort 2
+- Point fort 3

@@ -13,9 +13,9 @@ const pageTitle = title ? `${title} | ${site.name}` : `${site.name} - ${site.rol
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const nav = [
-  { href: url('/'), label: 'Home' },
-  { href: url('/projects/'), label: 'Projects' },
-  { href: url('/about/'), label: 'About' },
+  { href: url('/'), label: 'Accueil' },
+  { href: url('/projects/'), label: 'Projets' },
+  { href: url('/about/'), label: 'À propos' },
 ];
 const home = url('/').replace(/\/$/, '') || '/';
 const isActive = (href: string) => {
@@ -25,7 +25,7 @@ const isActive = (href: string) => {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,6 +36,7 @@ const isActive = (href: string) => {
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <meta property="og:title" content={pageTitle} />
+    <meta property="og:locale" content="fr_FR" />
     {description && <meta property="og:description" content={description} />}
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
   </head>
@@ -58,7 +59,7 @@ const isActive = (href: string) => {
     <footer class="container footer">
       <p>&copy; {new Date().getFullYear()} {site.name}</p>
       <ul class="socials">
-        {site.email && <li><a href={`mailto:${site.email}`}>Email</a></li>}
+        {site.email && <li><a href={`mailto:${site.email}`}>E-mail</a></li>}
         {site.socials?.map((s) => (
           <li><a href={s.url} rel="me noopener" target="_blank">{s.label}</a></li>
         ))}

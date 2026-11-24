@@ -15,7 +15,7 @@ const { Content } = await render(project);
 
 <Base title={title} description={description}>
   <article class="project">
-    <a class="back" href={url('/projects/')}>&larr; All projects</a>
+    <a class="back" href={url('/projects/')}>&larr; Tous les projets</a>
     <header>
       <time datetime={date.toISOString()}>{formatDate(date)}</time>
       <h1>{title}</h1>
@@ -26,8 +26,8 @@ const { Content } = await render(project);
         </ul>
       )}
       <div class="actions">
-        {link && <a class="button" href={link} target="_blank" rel="noopener">View live</a>}
-        {repo && <a class="button ghost" href={repo} target="_blank" rel="noopener">Source code</a>}
+        {link && <a class="button" href={link} target="_blank" rel="noopener">Voir le projet</a>}
+        {repo && <a class="button ghost" href={repo} target="_blank" rel="noopener">Code source</a>}
       </div>
     </header>
     {cover && <img class="cover" src={url(cover)} alt="" />}

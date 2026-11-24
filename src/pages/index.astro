@@ -13,16 +13,16 @@ const shown = (featured.length ? featured : projects).slice(0, 6);
   <section class="hero">
     {site.avatar && <img class="avatar" src={url(site.avatar)} alt={site.name} />}
     <p class="eyebrow">{site.role}</p>
-    <h1>Hi, I'm {site.name}.</h1>
+    <h1>Bonjour, je suis {site.name}.</h1>
     {site.tagline && <p class="lead">{site.tagline}</p>}
     <div class="actions">
-      <a class="button" href={url('/projects/')}>See my work</a>
-      {site.email && <a class="button ghost" href={`mailto:${site.email}`}>Get in touch</a>}
+      <a class="button" href={url('/projects/')}>Voir mes projets</a>
+      {site.email && <a class="button ghost" href={`mailto:${site.email}`}>Me contacter</a>}
     </div>
   </section>
 
   <section>
-    <h2>{featured.length ? 'Featured projects' : 'Recent projects'}</h2>
+    <h2>{featured.length ? 'Projets à la une' : 'Projets récents'}</h2>
     <div class="grid">
       {shown.map((project) => <ProjectCard project={project} />)}
     </div>

@@ -16,5 +16,5 @@ export async function getProjects() {
 }
 
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
 }

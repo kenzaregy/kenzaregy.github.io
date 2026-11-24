@@ -4,7 +4,7 @@ media:
 
 content:
   - name: projects
-    label: Projects
+    label: Projets
     type: collection
     path: src/content/projects
     filename: "{primary}.md"
@@ -16,73 +16,73 @@ content:
         order: desc
     fields:
       - name: title
-        label: Title
+        label: Titre
         type: string
         required: true
       - name: description
-        label: Short description
+        label: Description courte
         type: text
       - name: date
         label: Date
         type: date
         required: true
       - name: cover
-        label: Cover image
+        label: Image de couverture
         type: image
       - name: tags
         label: Tags
         type: string
         list: true
       - name: link
-        label: Live URL
+        label: Lien du projet
         type: string
       - name: repo
-        label: Source code URL
+        label: Lien du code source
         type: string
       - name: featured
-        label: Featured on home page
+        label: À la une (page d'accueil)
         type: boolean
         default: false
       - name: draft
-        label: Draft (hidden)
+        label: Brouillon (masqué)
         type: boolean
         default: false
       - name: body
-        label: Content
+        label: Contenu
         type: rich-text
 
   - name: settings
-    label: Site settings
+    label: Paramètres du site
     type: file
     path: src/data/site.json
     format: json
     fields:
       - name: name
-        label: Your name
+        label: Votre nom
         type: string
         required: true
       - name: role
-        label: Role / title
+        label: Métier / titre
         type: string
       - name: tagline
-        label: Tagline (home page)
+        label: Accroche (page d'accueil)
         type: text
       - name: about
-        label: About (blank line = new paragraph)
+        label: À propos (ligne vide = nouveau paragraphe)
         type: text
       - name: avatar
         label: Avatar
         type: image
       - name: email
-        label: Email
+        label: E-mail
         type: string
       - name: socials
-        label: Social links
+        label: Réseaux sociaux
         type: object
         list: true
         fields:
           - name: label
-            label: Label
+            label: Nom
             type: string
           - name: url
             label: URL
