@@ -1,14 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
 import { getProjects } from '../../lib/url';
 
 const projects = await getProjects();
 ---
 
-<Base title="Projets" description="Tous mes projets.">
-  <h1>Projets</h1>
-  <div class="grid">
-    {projects.map((project) => <ProjectCard project={project} />)}
-  </div>
+<Base title="Mon travail" description="Tous mes projets.">
+  <h1 class="visually-hidden">Mon travail</h1>
+  <ProjectGrid projects={projects} />
 </Base>

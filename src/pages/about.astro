@@ -7,19 +7,53 @@ const paragraphs = (site.about ?? '')
   .split(/\n\s*\n/)
   .map((p) => p.trim())
   .filter(Boolean);
+const expertise = (site.expertise ?? []).filter(Boolean);
+const phoneHref = site.phone ? `tel:${site.phone.replace(/[^\d+]/g, '')}` : '';
+const mailHref = site.email
+  ? `mailto:${site.email}?subject=${encodeURIComponent('Prise de contact depuis le portfolio')}`
+  : '';
 ---
 
 <Base title="À propos">
-  <section class="about">
-    {site.avatar && <img class="avatar" src={url(site.avatar)} alt={site.name} />}
-    <h1>À propos de moi</h1>
-    <div class="prose">
-      {paragraphs.map((p) => <p>{p}</p>)}
+  <h1 class="visually-hidden">À propos – {site.name}</h1>
+
+  {site.aboutImage && (
+    <img class="about-image" src={url(site.aboutImage)} alt="" />
+  )}
+
+  <section class="about-grid">
+    <div class="about-expertise">
+      {expertise.length > 0 && (
+        <>
+          <p class="small-label">Domaines d’expertise</p>
+          <h2 class="expertise-list">
+            {expertise.map((item) => <span>{item}</span>)}
+          </h2>
+        </>
+      )}
     </div>
-    {site.email && (
-      <p>
-        <a class="button" href={`mailto:${site.email}`}>Me contacter</a>
-      </p>
-    )}
+
+    <div class="about-content">
+      <div class="about-text">
+        {paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+
+      <div class="contact-details">
+        {site.email && (
+          <p>
+            <strong>E-mail</strong>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        )}
+        {site.phone && (
+          <p>
+            <strong>Téléphone</strong>
+            <a href={phoneHref}>{site.phone}</a>
+          </p>
+        )}
+      </div>
+
+      {mailHref && <a class="button" href={mailHref}>Travaillons ensemble.</a>}
+    </div>
   </section>
 </Base>

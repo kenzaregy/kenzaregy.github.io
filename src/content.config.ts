@@ -13,14 +13,12 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: optionalString,
-    date: z.coerce.date(),
+    date: z.string(),
     cover: optionalString,
     tags: z
       .array(z.string())
       .nullish()
       .transform((v) => (v ?? []).filter(Boolean)),
-    link: optionalString,
-    repo: optionalString,
     featured: z
       .boolean()
       .nullish()

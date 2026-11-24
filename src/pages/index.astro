@@ -1,30 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
 import site from '../data/site.json';
-import { getProjects, url } from '../lib/url';
+import { getProjects } from '../lib/url';
 
 const projects = await getProjects();
-const featured = projects.filter((p) => p.data.featured);
-const shown = (featured.length ? featured : projects).slice(0, 6);
+const ordered = [
+  ...projects.filter((p) => p.data.featured),
+  ...projects.filter((p) => !p.data.featured),
+];
 ---
 
 <Base>
-  <section class="hero">
-    {site.avatar && <img class="avatar" src={url(site.avatar)} alt={site.name} />}
-    <p class="eyebrow">{site.role}</p>
-    <h1>Bonjour, je suis {site.name}.</h1>
-    {site.tagline && <p class="lead">{site.tagline}</p>}
-    <div class="actions">
-      <a class="button" href={url('/projects/')}>Mes réalisations</a>
-      {site.email && <a class="button ghost" href={`mailto:${site.email}`}>Me contacter</a>}
-    </div>
-  </section>
-
-  <section>
-    <h2>{featured.length ? 'Projets à la une' : 'Projets récents'}</h2>
-    <div class="grid">
-      {shown.map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
+  <h1 class="visually-hidden">{site.name} – Mes réalisations</h1>
+  <ProjectGrid projects={ordered} />
 </Base>

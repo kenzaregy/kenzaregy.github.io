@@ -73,6 +73,13 @@ content:
       - name: avatar
         label: Avatar
         type: image
+      - name: aboutImage
+        label: Grande image (page À propos)
+        type: image
+      - name: expertise
+        label: Domaines d'expertise
+        type: string
+        list: true
       - name: email
         label: E-mail
         type: string

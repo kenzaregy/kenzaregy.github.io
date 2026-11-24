@@ -5,34 +5,57 @@ import { getProjects, url, formatDate } from '../../lib/url';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
-  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+  return projects.map((project, i) => ({
+    params: { id: project.id },
+    props: {
+      project,
+      prev: projects[i - 1] ?? null,
+      next: projects[i + 1] ?? null,
+    },
+  }));
 }
 
-const { project } = Astro.props;
-const { title, description, date, cover, tags, link, repo } = project.data;
+const { project, prev, next } = Astro.props;
+const { title, description, date, cover, tags } = project.data;
 const { Content } = await render(project);
 ---
 
 <Base title={title} description={description}>
   <article class="project">
-    <a class="back" href={url('/projects/')}>&larr; Tous les projets</a>
-    <header>
-      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+    <header class="project-header">
       <h1>{title}</h1>
       {description && <p class="lead">{description}</p>}
-      {tags.length > 0 && (
-        <ul class="tags">
-          {tags.map((tag) => <li>{tag}</li>)}
-        </ul>
-      )}
-      <div class="actions">
-        {link && <a class="button" href={link} target="_blank" rel="noopener">Voir le projet</a>}
-        {repo && <a class="button ghost" href={repo} target="_blank" rel="noopener">Code source</a>}
-      </div>
+      {date && <p class="date">{date}</p>}
+      <!-- <p class="meta">
+        <span>{date}</span>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {tags.length > 0 && <span> — {tags.join(', ')}</span>}
+      </p> -->
+      <!-- {(link || repo) && (
+        <p class="links">
+          {link && <a href={link} target="_blank" rel="noopener">Voir le projet</a>}
+          {repo && <a href={repo} target="_blank" rel="noopener">Code source</a>}
+        </p>
+      )} -->
     </header>
-    {cover && <img class="cover" src={url(cover)} alt="" />}
+    {cover && <img class="cover" src={url(cover)} alt={title} />}
     <div class="prose">
       <Content />
     </div>
   </article>
+
+  <nav class="pagination" aria-label="Projets">
+    {prev ? (
+      <a class="prev" href={url(`/projects/${prev.id}/`)}>
+        <span class="pagination-label">Précédent</span>
+        <span class="pagination-title">{prev.data.title}</span>
+      </a>
+    ) : <span></span>}
+    {next ? (
+      <a class="next" href={url(`/projects/${next.id}/`)}>
+        <span class="pagination-label">Suivant</span>
+        <span class="pagination-title">{next.data.title}</span>
+      </a>
+    ) : <span></span>}
+  </nav>
 </Base>

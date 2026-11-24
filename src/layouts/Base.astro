@@ -1,6 +1,9 @@
 ---
 import site from '../data/site.json';
 import { url } from '../lib/url';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
 import '../styles/global.css';
 
 interface Props {
@@ -12,15 +15,15 @@ const { title, description = site.tagline } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : `${site.name} - ${site.role}`;
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 
-const nav = [
-  { href: url('/projects/'), label: 'Réalisations' },
-  { href: url('/about/'), label: 'À propos' },
-];
 const home = url('/').replace(/\/$/, '') || '/';
-const isActive = (href: string) => {
-  const h = href.replace(/\/$/, '') || '/';
-  return h === home ? current === home : current.startsWith(h);
-};
+const projectsPath = url('/projects').replace(/\/$/, '');
+const aboutPath = url('/about').replace(/\/$/, '');
+
+const nav = [
+  { href: url('/'), label: 'Mes réalisations', active: current === home || current.startsWith(projectsPath) },
+  { href: url('/about/'), label: 'Contact', active: current.startsWith(aboutPath) },
+];
+// if (site.email) nav.push({ href: `mailto:${site.email}`, label: 'Contact', active: false });
 ---
 
 <!doctype html>
@@ -30,7 +33,7 @@ const isActive = (href: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%234f46e5'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='34' font-weight='700' fill='white'>P</text></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='black'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='34' font-weight='700' fill='white'>K</text></svg>"
     />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
@@ -42,13 +45,23 @@ const isActive = (href: string) => {
   <body>
     <header class="container header">
       <a class="brand" href={url('/')}>{site.name}</a>
-      <nav>
+      <nav class="site-nav" id="site-nav">
         {nav.map((item) => (
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          <a href={item.href} aria-current={item.active ? 'page' : undefined}>
             {item.label}
           </a>
         ))}
       </nav>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Ouvrir le menu"
+      >
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <main class="container">
@@ -56,14 +69,46 @@ const isActive = (href: string) => {
     </main>
 
     <footer class="container footer">
-      <p>&copy; {new Date().getFullYear()} {site.name}</p>
       <ul class="socials">
-        {site.phone && <li><a href={`tel:${site.phone}`}>{site.phone}</a></li>}
+        <!-- {site.phone && <li><a href={`tel:${site.phone}`}>{site.phone}</a></li>} -->
         <!-- {site.email && <li><a href={`mailto:${site.email}`}>E-mail</a></li>} -->
         {site.socials?.map((s) => (
           <li><a href={s.url} rel="me noopener" target="_blank">{s.label}</a></li>
         ))}
       </ul>
+      <p class="copyright">&copy; {new Date().getFullYear()} {site.name}</p>
     </footer>
+
+    <script>
+      const header = document.querySelector<HTMLElement>('.header');
+      const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+      const menu = header?.querySelector<HTMLElement>('.site-nav');
+
+      if (header && toggle && menu) {
+        const setOpen = (open: boolean) => {
+          header.classList.toggle('menu-open', open);
+          document.body.classList.toggle('no-scroll', open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+        };
+
+        toggle.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
+
+        menu.addEventListener('click', (event) => {
+          if ((event.target as HTMLElement).closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && header.classList.contains('menu-open')) {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+
+        window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+          if (event.matches) setOpen(false);
+        });
+      }
+    </script>
   </body>
 </html>
