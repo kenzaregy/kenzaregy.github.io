@@ -24,7 +24,7 @@ content:
         type: text
       - name: date
         label: Date
-        type: date
+        type: string
         required: true
       - name: cover
         label: Image de couverture
